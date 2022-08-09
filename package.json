@@ -1,0 +1,28 @@
+{
+  "name": "input-integer",
+  "version": "0.1.0",
+  "description": "Wizard Amigos starter template",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmmyMay/input-integer.git"
+  },
+  "keywords": [
+    "wizard",
+    "amigos",
+    "input",
+    "practice"
+  ],
+  "author": "EmmyB",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EmmyMay/input-integer/issues"
+  },
+  "homepage": "https://github.com/EmmyMay/input-integer#readme",
+  "devDependencies": {
+    "budo": "^11.7.0"
+  }
+}
