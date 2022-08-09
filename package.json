@@ -4,7 +4,7 @@
   "description": "Wizard Amigos starter template",
   "main": "src/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "budo demo/demo.js:bundle.js --live --open"
   },
   "repository": {
     "type": "git",
