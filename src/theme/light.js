@@ -10,6 +10,9 @@ function theme(containerClass) {
 .${containerClass} {
   position: relative;
   width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .${containerClass}::after {
