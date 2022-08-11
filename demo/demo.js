@@ -2,9 +2,10 @@ const inputInteger = require("..");
 // theme
 const { light } = require("../src/theme");
 const options = {
-  theme: light(),
+  theme: light("input_container"),
   min: 1,
   max: 2000,
+  inputContainerClass: "input_container",
 };
 const inputComponent = inputInteger(options);
 document.body.appendChild(inputComponent);
