@@ -7,5 +7,5 @@ const options = {
   max: 2000,
   inputContainerClass: "input_container",
 };
-const inputComponent = inputInteger(options);
-document.body.appendChild(inputComponent);
+const { el } = inputInteger(options);
+document.body.appendChild(el);
