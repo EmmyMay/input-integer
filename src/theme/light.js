@@ -1,4 +1,4 @@
-function theme() {
+function theme(containerClass) {
   return `
   input {
   padding: 1rem;
@@ -6,12 +6,12 @@ function theme() {
   border: none;
 }
 
-.input_container {
+.${containerClass} {
   position: relative;
   width: fit-content;
 }
 
-.input_container::after {
+.${containerClass}::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -28,12 +28,10 @@ input:focus {
   outline: none;
 }
 
-.input_container:focus-within::after {
+.${containerClass}:focus-within::after {
   transform: scaleX(1);
   transform-origin: left;
-}
-   
-  `;
+}`;
 }
 
 module.exports = theme;
