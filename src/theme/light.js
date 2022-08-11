@@ -4,6 +4,7 @@ function theme(containerClass) {
   padding: 1rem;
   background-color: hsla(35, 88%, 94%, 0.397);
   border: none;
+  width: 15rem;
 }
 
 .${containerClass} {
