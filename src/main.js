@@ -24,6 +24,7 @@ function inputInteger(options) {
   input.step = step;
   input.setAttribute("id", inputId);
   input.onkeyup = (e) => handle_onkeyup(e, input);
+  input.onmouseleave = (e) => handle_mouseleave(e, input);
 
   const inputLabel = document.createElement("label");
   inputLabel.setAttribute("for", inputId);
@@ -43,5 +44,10 @@ function handle_onkeyup(e, input) {
   let value = Number(e.target.value);
   if (value > input.max) input.value = input.max;
   if (value < input.min) input.value = 0;
+}
+
+function handle_mouseleave(e, input) {
+  let value = Number(e.target.value);
+  if (value < input.min) input.value = "";
 }
 module.exports = inputInteger;
