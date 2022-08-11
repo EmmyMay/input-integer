@@ -25,6 +25,7 @@ function inputInteger(options) {
   input.setAttribute("id", inputId);
   input.onkeyup = (e) => handle_onkeyup(e, input);
   input.onmouseleave = (e) => handle_mouseleave(e, input);
+  input.onblur = (e) => handle_blur(e, input);
 
   const inputLabel = document.createElement("label");
   inputLabel.setAttribute("for", inputId);
@@ -47,6 +48,10 @@ function handle_onkeyup(e, input) {
 }
 
 function handle_mouseleave(e, input) {
+  let value = Number(e.target.value);
+  if (value < input.min) input.value = "";
+}
+function handle_blur(e, input) {
   let value = Number(e.target.value);
   if (value < input.min) input.value = "";
 }
