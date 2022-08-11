@@ -30,12 +30,27 @@ function theme(containerClass) {
 }
 input:focus {
   outline: none;
+  box-shadow: -4px 7px 20px -5px rgba(0,0,0,0.29);
+-webkit-box-shadow: -4px 7px 20px -5px rgba(0,0,0,0.29);
+-moz-box-shadow: -4px 7px 20px -5px rgba(0,0,0,0.29);
 }
 
 .${containerClass}:focus-within::after {
   transform: scaleX(1);
   transform-origin: left;
-}`;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
+`;
 }
 
 module.exports = theme;
