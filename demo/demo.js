@@ -1,6 +1,6 @@
-const inputInteger = require("..");
+const inputInteger = require("@emmyb/input-integer");
 // theme
-const { light } = require("../src/theme");
+const { light } = require("@emmyb/input-integer/src/theme/");
 
 const app = document.createElement("div");
 app.setAttribute("id", "app");
