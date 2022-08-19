@@ -1,4 +1,4 @@
-function inputInteger(options) {
+function inputInteger(options, on = {}) {
   const {
     min = 0,
     max = 1000,
@@ -34,11 +34,14 @@ function inputInteger(options) {
   const inputContainer = document.createElement("div");
   inputContainer.setAttribute("class", inputContainerClass);
   inputContainer.append(inputLabel, input);
+  Object.keys(on).map((K) => {
+    return (input[`on${K}`] = on[K]);
+  });
   shadow.appendChild(inputContainer);
 
   shadow.adoptedStyleSheets = [styleSheet];
 
-  return { el, input };
+  return el;
 }
 
 function clearInput(e, input) {

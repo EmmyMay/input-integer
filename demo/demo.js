@@ -1,6 +1,6 @@
-const inputInteger = require("@emmyb/input-integer");
+const inputInteger = require("..");
 // theme
-const { light } = require("@emmyb/input-integer/src/theme/");
+const { light } = require("../src/theme");
 
 const app = document.createElement("div");
 app.setAttribute("id", "app");
@@ -19,22 +19,22 @@ const birthOptions = {
   inputContainerClass: "input2_container",
   label: "Enter your date of birth",
 };
-// creating the inputs
-const ageInput = inputInteger(ageOptions);
-const birthInput = inputInteger(birthOptions);
-
-// different on keyup functionality
-// you can override the default event listener functions here
-birthInput.input.onkeyup = (e) => {
-  const value = e.target.value;
-  const value_len = value.length;
-  const min_length = birthOptions.min.toString().length;
-  if (value > birthOptions.max) birthInput.input.value = birthOptions.max;
-  if (value_len === min_length && value < birthOptions.min) {
-    birthInput.input.value = birthOptions.min;
-  }
+const on = {
+  keyup: (e) => {
+    const value = e.target.value;
+    const value_len = value.length;
+    const min_length = birthOptions.min.toString().length;
+    if (value > birthOptions.max) birthInput.input.value = birthOptions.max;
+    if (value_len === min_length && value < birthOptions.min) {
+      birthInput.input.value = birthOptions.min;
+    }
+  },
 };
 
+// creating the inputs
+const ageInput = inputInteger(ageOptions);
+const birthInput = inputInteger(birthOptions, on);
+
 // adding elements to dom
-app.append(ageInput.el, birthInput.el);
+app.append(ageInput, birthInput);
 document.body.appendChild(app);
