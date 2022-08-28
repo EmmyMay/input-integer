@@ -1,53 +1,52 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 const inputInteger = require("..");
 // theme
-const { light } = require("../src/theme");
+const { dark } = require("../src/theme");
 
 const app = document.createElement("div");
 app.setAttribute("id", "app");
 
 const ageOptions = {
-  theme: light("input_container"),
+  theme: dark(),
   min: 1,
   max: 80,
   inputContainerClass: "input_container",
   label: "Enter your age",
 };
 const birthOptions = {
-  theme: light("input2_container"),
+  theme: dark(),
   min: 1772,
   max: 2022,
   inputContainerClass: "input2_container",
   label: "Enter your date of birth",
 };
-// creating the inputs
-const ageInput = inputInteger(ageOptions);
-const birthInput = inputInteger(birthOptions);
-
-// different on keyup functionality
-// you can override the default event listener functions here
-birthInput.input.onkeyup = (e) => {
-  const value = e.target.value;
-  const value_len = value.length;
-  const min_length = birthOptions.min.toString().length;
-  if (value > birthOptions.max) birthInput.input.value = birthOptions.max;
-  if (value_len === min_length && value < birthOptions.min) {
-    birthInput.input.value = birthOptions.min;
-  }
+const on = {
+  keyup: (e) => {
+    const value = e.target.value;
+    const value_len = value.length;
+    const min_length = birthOptions.min.toString().length;
+    if (value > birthOptions.max) birthInput.input.value = birthOptions.max;
+    if (value_len === min_length && value < birthOptions.min) {
+      birthInput.input.value = birthOptions.min;
+    }
+  },
 };
 
+// creating the inputs
+const ageInput = inputInteger(ageOptions);
+const birthInput = inputInteger(birthOptions, on);
+
 // adding elements to dom
-app.append(ageInput.el, birthInput.el);
+app.append(ageInput, birthInput);
 document.body.appendChild(app);
 
 },{"..":2,"../src/theme":4}],2:[function(require,module,exports){
-function inputInteger(options) {
+function inputInteger(options, on = {}) {
   const {
     min = 0,
     max = 1000,
     theme,
     label = "Input Integer",
-    inputContainerClass = "input_container",
     inputId = "Input-Integer",
     step = "0",
   } = options;
@@ -75,13 +74,15 @@ function inputInteger(options) {
   inputLabel.textContent = label;
 
   const inputContainer = document.createElement("div");
-  inputContainer.setAttribute("class", inputContainerClass);
   inputContainer.append(inputLabel, input);
+  Object.keys(on).map((K) => {
+    return (input[`on${K}`] = on[K]);
+  });
   shadow.appendChild(inputContainer);
 
   shadow.adoptedStyleSheets = [styleSheet];
 
-  return { el, input };
+  return el;
 }
 
 function clearInput(e, input) {
@@ -99,14 +100,14 @@ module.exports = inputInteger;
 },{}],3:[function(require,module,exports){
 function theme(containerClass) {
   return `
-  input {
+:host input {
   padding: 1rem;
   background-color: hsla(0, 0%, 4%, 0.205);
   border: none;
   width: 15rem;
 }
 
-.${containerClass} {
+:host div {
   position: relative;
   width: fit-content;
   display: flex;
@@ -114,7 +115,7 @@ function theme(containerClass) {
   gap: 1rem;
 }
 
-.${containerClass}::after {
+:host div::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -127,22 +128,22 @@ function theme(containerClass) {
   transition: transform 200ms ease-in;
   z-index: -1;
 }
-input:focus {
+:host input:focus {
   outline: none;
 
 }
 
-.${containerClass}:focus-within::after {
+:host div:focus-within::after {
   transform: scaleX(1);
   transform-origin: left;
 }
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+:host input::-webkit-outer-spin-button,
+:host input::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */
     -webkit-appearance: none;
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
-input[type=number] {
+:host input[type=number] {
     -moz-appearance:textfield; /* Firefox */
 }
 
@@ -163,14 +164,14 @@ module.exports = {
 },{"./dark":3,"./light":5}],5:[function(require,module,exports){
 function theme(containerClass) {
   return `
-  input {
+:host input {
   padding: 1rem;
   background-color: hsla(35, 88%, 94%, 0.397);
   border: none;
   width: 15rem;
 }
 
-.${containerClass} {
+:host div {
   position: relative;
   width: fit-content;
   display: flex;
@@ -178,7 +179,7 @@ function theme(containerClass) {
   gap: 1rem;
 }
 
-.${containerClass}::after {
+:host div::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -191,25 +192,25 @@ function theme(containerClass) {
   transition: transform 200ms ease-in;
   z-index: -1;
 }
-input:focus {
+:host input:focus {
   outline: none;
   box-shadow: -4px 7px 20px -5px rgba(0,0,0,0.29);
 -webkit-box-shadow: -4px 7px 20px -5px rgba(0,0,0,0.29);
 -moz-box-shadow: -4px 7px 20px -5px rgba(0,0,0,0.29);
 }
 
-.${containerClass}:focus-within::after {
+:host div:focus-within::after {
   transform: scaleX(1);
   transform-origin: left;
 }
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+:host input::-webkit-outer-spin-button,
+:host input::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */
     -webkit-appearance: none;
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
-input[type=number] {
+:host input[type=number] {
     -moz-appearance:textfield; /* Firefox */
 }
 
