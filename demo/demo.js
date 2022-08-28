@@ -1,19 +1,19 @@
 const inputInteger = require("..");
 // theme
-const { light } = require("../src/theme");
+const { dark } = require("../src/theme");
 
 const app = document.createElement("div");
 app.setAttribute("id", "app");
 
 const ageOptions = {
-  theme: light("input_container"),
+  theme: dark(),
   min: 1,
   max: 80,
   inputContainerClass: "input_container",
   label: "Enter your age",
 };
 const birthOptions = {
-  theme: light("input2_container"),
+  theme: dark(),
   min: 1772,
   max: 2022,
   inputContainerClass: "input2_container",
