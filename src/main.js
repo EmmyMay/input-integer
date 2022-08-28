@@ -4,7 +4,6 @@ function inputInteger(options, on = {}) {
     max = 1000,
     theme,
     label = "Input Integer",
-    inputContainerClass = "input_container",
     inputId = "Input-Integer",
     step = "0",
   } = options;
@@ -32,7 +31,6 @@ function inputInteger(options, on = {}) {
   inputLabel.textContent = label;
 
   const inputContainer = document.createElement("div");
-  inputContainer.setAttribute("class", inputContainerClass);
   inputContainer.append(inputLabel, input);
   Object.keys(on).map((K) => {
     return (input[`on${K}`] = on[K]);
