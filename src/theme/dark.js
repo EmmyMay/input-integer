@@ -1,4 +1,4 @@
-function theme(containerClass) {
+function theme() {
   return `
 :host input {
   padding: 1rem;

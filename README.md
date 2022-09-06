@@ -8,7 +8,7 @@ import inputInteger from '@emmyb/input-integer'
 //or
 const inputInteger = require("@emmyb/input-integer");
 ```
-This function returns an el for you to append to the DOM.
+This function returns an el for you to append to the DOM and the input element rendered on screen itself.
 
 ********
 You can pass in options such as:
@@ -18,8 +18,6 @@ const {
     max = 1000, //number
     theme, //the appearance of the input
     label = "Input Integer", //the label of the input
-    inputContainerClass = 
-    "input_container", //css classname for the container used for the fancy underline animation
     inputId = "Input-Integer", //input element id. Useful for the label element
     step = "0" //step attribute for incrementing the value of the input
   } = options;
@@ -34,7 +32,9 @@ const { light } = require("@emmyb/input-integer/src/theme/"); //or {dark}
 You can create yours as was done [here on stackblitz](https://stackblitz.com/edit/js-yzcdts?file=index.js).
 
 ## Event Listeners
-There are some default event listeners handled for you to ensure min and max are respected. However, you can add an **object holding all your event listeners as below**
+There are some default event listeners handled for you to ensure min and max are respected.You can add event listeners to the component by passing an **ON** object to the componenet instance.
+
+
 ```js
 import inputInteger from '@emmyb/input-integer'
 //or
@@ -45,32 +45,19 @@ const {
     max = 1000, //number
     theme, //the appearance of the input
     label = "Input Integer", //the label of the input
-    inputContainerClass = 
-    "input_container", //css classname for the container used for the fancy underline animation
     inputId = "Input-Integer", //input element id. Useful for the label element
     step = "0" //step attribute for incrementing the value of the input
   } = options;
-
-// The on object can be anything but its methods have to be just as the name of the event listeners without the "on" prefix.
-  const on = {
-  keyup: (e) => {
-    const value = e.target.value;
-    const value_len = value.length;
-    const min_length = birthOptions.min.toString().length;
-    if (value > birthOptions.max) birthInput.input.value = birthOptions.max;
-    if (value_len === min_length && value < birthOptions.min) {
-      birthInput.input.value = birthOptions.min;
-    }
-  },
-};
   
+const on = {
+  keyup: (e) => {  },
+};
 const priceComponent = inputInteger(options, on)
-
 ```
 
 ## Display in the browser
 ```js
 const app = document.createElement("div");
-app.append(ageInput.el, birthInput.el);
+app.append(ageInput, birthInput);
 document.body.appendChild(app);
 ```
