@@ -1,4 +1,5 @@
 function inputInteger(options, on = {}) {
+  console.log("I am integer!!!!!!!!!");
   const {
     min = 0,
     max = 1000,
