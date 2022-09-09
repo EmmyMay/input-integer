@@ -1,4 +1,4 @@
-# @emmyb/input-integer
+# wizard-input-integer
 ## What is it?
 It is a number input component that is very flexible for you to customize or use.
 
