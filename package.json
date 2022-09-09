@@ -2,7 +2,7 @@
   "name": "@emmyb/input-integer",
   "version": "0.1.4",
   "description": "Wizard Amigos starter template",
-  "main": "index.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "budo demo/demo.js:bundle.js --live --open",
     "build": "browserify demo/demo.js > bundle.js"
