@@ -1,4 +1,4 @@
-const inputInteger = require("..");
+const inputInteger = require("../src");
 // theme
 const { dark } = require("../src/theme");
 
