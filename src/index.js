@@ -1,43 +1,33 @@
 let id = 0;
 
 function inputInteger(options, protocol, on = {}) {
+  // component name
+  const componentName = `integer-${id++}`;
+
   const {
     min = 0,
     max = 1000,
     theme,
-    label = "Input Integer",
+    labelValue = "Input Integer",
     inputId = "Input-Integer",
     step = "0",
   } = options;
 
-  // component name
-  const componentName = `integer-${id++}`;
-  const el = createElement({ attr: "id", attrVal: "input_wrapper" });
-
+  const el = document.createElement("div");
   const shadow = el.attachShadow({ mode: "closed" });
 
-  const input = createElement({ el: "input", attr: "id", attrVal: inputId });
-  input.type = "number";
-  input.min = min;
-  input.max = max;
-  input.step = step;
+  shadow.innerHTML = `
+  <div>
+    <label for="${inputId}">${labelValue}</label>
+    <input min="${min}" max="${max}" step="${step}" type="number">
+  </div>
+`;
+  const [, input] = shadow.firstElementChild.children;
 
   // event handling
   input.onkeyup = (e) => handle_onkeyup(e, input);
   input.onmouseleave = (e) => clearInput(e, input);
   input.onblur = (e) => clearInput(e, input);
-
-  const inputLabel = createElement({
-    el: "label",
-    attr: "for",
-    attrVal: inputId,
-  });
-  inputLabel.textContent = label;
-
-  const inputContainer = createElement();
-  appendElement(inputContainer, inputLabel, input);
-
-  appendElement(shadow, inputContainer);
 
   // capturing events
   Object.keys(on).map((K) => {
@@ -74,13 +64,5 @@ const styleComponent = (theme, shadow) => {
   const styleSheet = new CSSStyleSheet();
   styleSheet.replaceSync(theme);
   shadow.adoptedStyleSheets = [styleSheet];
-};
-const createElement = ({ el = "div", attr, attrVal } = {}) => {
-  const ele = document.createElement(el);
-  if (attr && attrVal) ele.setAttribute(attr, attrVal);
-  return ele;
-};
-const appendElement = (target, ...children) => {
-  target.append(...children);
 };
 module.exports = inputInteger;
